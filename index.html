@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload de Arquivo</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>Upload de Arquivo</h1>
+    <input type="file" id="fileInput">
+    <button onclick="uploadFile()">Enviar</button>
+    <div id="result"></div>
+    <script>
+function uploadFile() {
+    var fileInput = document.getElementById('fileInput');
+    var file = fileInput.files[0];
+    var formData = new FormData();
+    formData.append('file', file);
+
+    $.ajax({
+        url: 'http://127.0.0.1:5000/processar-arquivo',
+        type: 'POST',
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function(response) {
+            // Exibir resposta do backend
+            var resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = response;
+        },
+        error: function(error) {
+            console.log(error);
+        }
+    });
+}
+
+
+    </script>
+</body>
+</html>
+
+
+
+
+
+<!-- 
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Upload de Arquivo</title>
+  
+</head>
+<body>
+  <h1>Upload de Arquivo111</h1>
+  <input type="file" id="fileInput">
+  <button onclick="processFile()">Enviar</button>
+  <div id="output"></div>
+  <script>
+    function processFile() {
+  var fileInput = document.getElementById("fileInput");
+  var file = fileInput.files[0];
+  var formData = new FormData();
+  formData.append("file", file);
+
+  var request = new XMLHttpRequest();
+  request.open("POST", "/processar-arquivo");
+  request.onload = function() {
+    if (request.status === 200) {
+      var response = JSON.parse(request.responseText);
+      var outputDiv = document.getElementById("output");
+      outputDiv.innerHTML = "";
+      for (var i = 0; i < response.names.length; i++) {
+        outputDiv.innerHTML += response.names[i] + "<br>";
+      }
+    }
+  };
+  request.send(formData);
+}
+
+  </script>
+</body>
+</html>
+
+
+
+ -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
